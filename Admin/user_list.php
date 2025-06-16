@@ -1,4 +1,17 @@
+<?php
+include ("../db.php");
 
+if(isset($_POST['save'])){
+    $name = $_POST['uname'];
+    $email = $_POST['uemail'];
+    $phone = $_POST['uphone'];
+    $address = $_POST['uaddress'];
+    $password = $_POST['upass'];
+    $role = 'admin';
+    $sql = "INSERT INTO users (user_name,user_email,uphno,uaddress,user_pass,user_role) VALUES ('$name','$email','$phone','$address','$password','$role')";
+    $result = mysqli_query($conn,$sql);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -102,6 +115,18 @@
                                     <input type="text" name="upass" class="form-control" >
                                 </div>
                             </div>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">User Phone No</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="uphone" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">User Address</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="uaddress" class="form-control" >
+                                </div>
+                            </div>
                             <input type="submit" name="save" value="Save" class="btn btn-success mt-4">
                         </form>
 
@@ -112,6 +137,8 @@
                                     <th>User ID</th>
                                     <th>User Name</th>
                                     <th>User Email</th>
+                                    <th>Phone No</th>
+                                    <th>Address</th>
                                     <th>User role</th>
                                     <th>User Password</th>
                                     <th>Action</th>
@@ -123,23 +150,37 @@
                                     <th>User ID</th>
                                     <th>User Name</th>
                                     <th>User Email</th>
+                                    <th>Phone No</th>
+                                    <th>Address</th>
                                     <th>User role</th>
                                     <th>User Password</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
+                                <?php 
+                                    $sql = "SELECT * FROM users";
+                                    $result = mysqli_query($conn,$sql);
+                                    $i = 1;
+                                    while($data = mysqli_fetch_assoc($result)){
+
+                                ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>Jonathin</td>
-                                    <td>jon232@gmail.com</td>
-                                    <td>User</td>
-                                    <td>password32112</td>
+                                    <td><?php echo $i++ ?></td>
+                                    <td><?php echo $data['user_id'] ?></td>
+                                    <td><?php echo $data['user_name'] ?></td>
+                                    <td><?php echo $data['user_email'] ?></td>
+                                    <th><?php echo $data['uphno'] ?></th>
+                                    <th><?php echo $data['uaddress'] ?></th>
+                                    <td><?php echo $data['user_role'] ?></td>
+                                    <td><?php echo $data['user_pass'] ?></td>
                                     <td><a href="user_edit.html" type="submit" class="btn btn-sm btn-outline-success">Edit</a>
                                         <a href="user_delete.html" type="submit" class="btn btn-sm btn-outline-danger">Delete</a>
                                     </td>
                                 </tr>
+
+                                <?php } ?>
+
                             </tbody>
                            
                           
