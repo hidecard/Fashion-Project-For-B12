@@ -26,8 +26,8 @@
             <i class="fa-brands fa-instagram"></i>
         </div>
         <div class="other-links">
-            <button id="btn-login"><a href="login.html">Login</a></button>
-            <button id="btn-signup"><a href="signup.html">Sign up</a></button>
+            <button id="btn-login"><a href="login.php">Login</a></button>
+            <button id="btn-signup"><a href="signup.php">Sign up</a></button>
             <i class="fa-solid fa-user"></i>
             <i class="fa-solid fa-cart-shopping"></i>
         </div>
