@@ -174,8 +174,8 @@ if(isset($_POST['save'])){
                                     <th><?php echo $data['uaddress'] ?></th>
                                     <td><?php echo $data['user_role'] ?></td>
                                     <td><?php echo $data['user_pass'] ?></td>
-                                    <td><a href="user_edit.html" type="submit" class="btn btn-sm btn-outline-success">Edit</a>
-                                        <a href="user_delete.html" type="submit" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    <td><a href="user_edit.php?id=<?php echo $data['user_id'] ?>" type="submit" class="btn btn-sm btn-outline-success">Edit</a>
+                                        <a href="user_delete.php?id=<?php echo $data['user_id'] ?>" type="submit" class="btn btn-sm btn-outline-danger">Delete</a>
                                     </td>
                                 </tr>
 

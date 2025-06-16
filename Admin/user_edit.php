@@ -1,4 +1,30 @@
+<?php
+ob_start();
+include ("../db.php");
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+}
 
+?>
+
+<?php
+
+if(isset($_POST['save'])){
+    $uname = $_POST['uname'];
+    $uemail = $_POST['uemail'];
+    $upass = $_POST['upass'];
+    $uphone = $_POST['uphone'];
+    $uaddress = $_POST['uaddress'];
+
+    $sql1 = "UPDATE `users` SET `user_name`='$uname',`user_email`='$uemail',`user_pass`='$upass',`uphno`='$uphone',`uaddress`='$uaddress' WHERE user_id = $id";
+    $result = mysqli_query($conn,$sql1);
+    if($result){
+        header("location:user_list.php");
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -84,31 +110,56 @@
                     <div class="container-fluid px-4">
                         <h3 class="mt-4">User Lists</h3>
 
+        <?php
+        $sql = "SELECT * FROM users WHERE user_id = $id";
+        $result = mysqli_query($conn,$sql);
+        $data = mysqli_fetch_assoc($result);
+        ?>
+
         <form action="" class="p-3 mt-5" method="post">
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">User ID</label>
                 <div class="col-sm-10">
-                    <input type="text" value="" disabled name="uid" class="form-control" >
+                    <input type="text" value="<?php echo $data['user_id'] ?>" disabled name="uid" class="form-control" >
+
                 </div>
             </div>    
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">User Name</label>
                 <div class="col-sm-10">
-                    <input type="text" value="" name="uname" class="form-control" >
+                    <input type="text" value="<?php echo $data['user_name'] ?>" name="uname" class="form-control" >
+
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">User Email</label>
                 <div class="col-sm-10">
-                    <input type="text" value="" name="uemail" class="form-control" >
+                    <input type="text" value="<?php echo $data['user_email'] ?>" name="uemail" class="form-control" >
+
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">User Password</label>
                 <div class="col-sm-10">
-                    <input type="text" value="" name="upass" class="form-control" >
+                    <input type="text" value="<?php echo $data['user_pass'] ?>" name="upass" class="form-control" >
+
                 </div>
             </div>
+                <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">User Phone No</label>
+                <div class="col-sm-10">
+                    <input type="text" value="<?php echo $data['uphno'] ?>" name="uphone" class="form-control" >
+
+                </div>
+            </div>
+              <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">User Address</label>
+                <div class="col-sm-10">
+                    <input type="text" value="<?php echo $data['uaddress'] ?>" name="uaddress" class="form-control" >
+
+                </div>
+            </div>
+            
             <input type="submit" name="save" value="Save" class="btn btn-success mt-4">
         </form>
 
